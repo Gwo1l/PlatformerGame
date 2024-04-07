@@ -2,21 +2,17 @@ package inputs;
 
 import main.GamePanel;
 
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import static utils.Constants.Directions.*;
 
-public class KeyboardInputs implements KeyListener {
-
+public class KeyboardInputs extends KeyAdapter {
     private GamePanel gamePanel;
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
 
     @Override
     public void keyPressed(KeyEvent e) {

@@ -1,5 +1,7 @@
 package entities;
 
+import utils.LoadSave;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,6 +19,8 @@ public class Player extends Entitiy {
     private int playerAction = IDLE;
     private int playerDirection = -1;
     private boolean left, right, up, down;
+    private int spriteWidth = 80;
+    private int spriteHeight = 94;
     private float playerSpeed = 2.0f;
     public Player(float x, float y) {
         super(x, y);
@@ -85,26 +89,14 @@ public class Player extends Entitiy {
     }
 
     private void loadAnimations() {
-        InputStream is = getClass().getResourceAsStream("/playerSprite.png");
-        try {
-            BufferedImage img = ImageIO.read(is);
-            animations = new BufferedImage[5][8];
-            for (int j = 0; j < animations.length; j++) {
-                for (int i = 0; i < animations[j].length; i++) {
-                    animations[j][i] = img.getSubimage(i * 80, j * 94, 80, 94);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        finally {
-            try {
-                is.close();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
+        BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_SPRITE);
+        animations = new BufferedImage[5][8];
+        for (int j = 0; j < animations.length; j++) {
+            for (int i = 0; i < animations[j].length; i++) {
+                animations[j][i] = img.getSubimage(i * spriteWidth, j * spriteHeight, spriteWidth, spriteHeight);
             }
         }
+
     }
 
     public void setJumping(boolean jumping) {
