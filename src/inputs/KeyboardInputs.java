@@ -29,6 +29,9 @@ public class KeyboardInputs extends KeyAdapter {
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(true);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(true);
+
         }
     }
 
@@ -48,7 +51,7 @@ public class KeyboardInputs extends KeyAdapter {
                 gamePanel.getGame().getPlayer().setRight(false);
                 break;
             case KeyEvent.VK_SPACE:
-                gamePanel.getGame().getPlayer().setJumping(true);
+                gamePanel.getGame().getPlayer().setJump(false);
         }
     }
 }

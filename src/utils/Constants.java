@@ -13,6 +13,7 @@ public class Constants {
         public static final int RUN_N_GUN = 2;
         public static final int IDLE = 0;
         public static final int JUMP = 3;
+        public static final int FALLING = 5;
         public static final int SIT = 4;
         public static final int DYING = 7;
 
@@ -23,6 +24,7 @@ public class Constants {
                 case JUMP -> 3;
                 case SIT -> 2;
                 case DYING -> 4;
+                //case FALLING -> 5;
                 default -> 1;
             };
         }
