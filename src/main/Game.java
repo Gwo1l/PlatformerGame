@@ -1,6 +1,9 @@
 package main;
 
 import entities.Player;
+import gamestates.Gamestate;
+import gamestates.Playing;
+import gamestates.Menu;
 import levels.LevelManager;
 
 import java.awt.*;
@@ -18,6 +21,9 @@ public class Game implements Runnable{
 	private int playerWidth = 200;
 	private int playerHeight = 200;
 
+	private Playing playing;
+	private Menu menu;
+
 	public static final int TILES_DEFAULT_SIZE = 32;
 	public static final float SCALE = 1.5f;
 	public static final int TILES_IN_WIDTH = 26;
@@ -26,8 +32,7 @@ public class Game implements Runnable{
 	public static final int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public static final int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 	private LevelManager levelManager;
-
-	Player player;
+	private Player player;
 	
 	public Game() {
 		initClasses();
@@ -38,9 +43,8 @@ public class Game implements Runnable{
 	}
 
 	private void initClasses() {
-		levelManager = new LevelManager(this);
-		player = new Player(playerXPosition, playerYPosition, playerWidth, playerHeight);
-		player.loadlvlData(levelManager.getCurrentLevel().getLvlData());
+		menu = new Menu(this);
+		playing = new Playing(this);
 	}
 
 	private void startGameLoop() {
@@ -92,20 +96,39 @@ public class Game implements Runnable{
 	}
 
 	public void update() {
-		player.update();
-		levelManager.update();
+		switch (Gamestate.state) {
+			case PLAYING -> {
+				playing.update();
+			}
+			case MENU -> {
+				menu.update();
+			}
+		}
 	}
 
 	public void render(Graphics g) {
-		levelManager.draw(g);
-		player.render(g);
+		switch (Gamestate.state) {
+			case PLAYING -> {
+				playing.draw(g);
+			}
+			case MENU -> {
+				menu.draw(g);
+			}
+		}
 	}
 
-	public Player getPlayer() {
-		return player;
-	}
+
 
 	public void windowFocusLost() {
-		player.resetDirBoolean();
+		if (Gamestate.state == Gamestate.PLAYING) {
+			playing.getPlayer().resetDirBoolean();
+		}
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+	public Playing getPlaying() {
+		return playing;
 	}
 }
