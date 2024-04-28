@@ -22,7 +22,7 @@ public class Player extends Entitiy {
     private boolean left, right, up, down, jump;
     private int spriteWidth = 80;
     private int spriteHeight = 94;
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 1.0f * Game.SCALE;
     private float xHitboxOffset = 9 * Game.SCALE;
     private float yHitboxOffset = 8 * Game.SCALE;
     private int[][] lvlData;
@@ -35,7 +35,7 @@ public class Player extends Entitiy {
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
-        initHitbox(x, y, 17 * Game.SCALE, 28 * Game.SCALE);
+        initHitbox(x, y, (int) (17 * Game.SCALE), (int) (28 * Game.SCALE));
     }
 
     public void update() {

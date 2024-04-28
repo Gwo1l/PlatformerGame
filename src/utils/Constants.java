@@ -1,6 +1,14 @@
 package utils;
 
+import main.Game;
+
 public class Constants {
+    public static class UserInterface {
+        public static final int BUTT0N_WIDTH_DEFUALT = 140;
+        public static final int BUTT0N_HEIGHT_DEFUALT = 56;
+        public static final int BUTT0N_WIDTH = (int) (BUTT0N_WIDTH_DEFUALT * Game.SCALE);
+        public static final int BUTT0N_HEIGHT = (int) (BUTT0N_HEIGHT_DEFUALT * Game.SCALE);
+    }
 
     public static class Directions {
         public static final int LEFT = 0;
