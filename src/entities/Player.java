@@ -44,8 +44,8 @@ public class Player extends Entitiy {
         setAnimation();
     }
 
-    public void render(Graphics g) {
-        g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset), (int)(hitbox.y - yHitboxOffset), 53, 63, null);
+    public void render(Graphics g, int lvlOffset) {
+        g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset) - lvlOffset, (int)(hitbox.y - yHitboxOffset), 53, 63, null);
         //drawHitbox(g);
     }
 
@@ -56,7 +56,13 @@ public class Player extends Entitiy {
         if (jump)
             jump();
 
-        if (!left && !right && !inAir) return;
+        if (!left && !right && !inAir)
+            return;
+        if (!inAir) {
+            if ((!left && !right) || (right && left)) {
+                return;
+            }
+        }
 
         float xSpeed = 0;
 

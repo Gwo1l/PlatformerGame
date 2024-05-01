@@ -11,12 +11,13 @@ import java.awt.image.BufferedImage;
 
 public class Menu extends State implements StateMethods{
     ButtonInMenu[] buttons = new ButtonInMenu[3];
-    BufferedImage menuBackgorund;
+    BufferedImage menuBackgorund, eldenRingBackground;
     private int menuX, menuY, menuWidth, menuHeight;
     public Menu(Game game) {
         super(game);
         loadButtons();
         loadBackgrounds();
+        eldenRingBackground = LoadSave.getSpriteAtlas(LoadSave.ELDEN_RING_BACKGROUND);
     }
 
     private void loadBackgrounds() {
@@ -42,6 +43,7 @@ public class Menu extends State implements StateMethods{
 
     @Override
     public void draw(Graphics g) {
+        g.drawImage(eldenRingBackground, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
         g.drawImage(menuBackgorund, menuX, menuY, menuWidth, menuHeight, null);
         for (ButtonInMenu mb : buttons) {
             mb.draw(g);

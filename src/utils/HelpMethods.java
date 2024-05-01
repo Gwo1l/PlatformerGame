@@ -16,7 +16,8 @@ public class HelpMethods {
     }
 
     public static boolean isThatWall(float x, float y, int[][] lvlData) {
-        if (x < 0 || x >= Game.GAME_WIDTH || y < 0 || y >= Game.GAME_HEIGHT)
+        int maxWidth = lvlData[0].length * Game.TILES_SIZE;
+        if (x < 0 || x >= maxWidth || y < 0 || y >= Game.GAME_HEIGHT)
             return true;
         float xIndex = x / Game.TILES_SIZE;
         float yIndex = y / Game.TILES_SIZE;
