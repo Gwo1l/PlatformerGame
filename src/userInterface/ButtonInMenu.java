@@ -3,6 +3,7 @@ package userInterface;
 import gamestates.Gamestate;
 import utils.LoadSave;
 import static utils.Constants.UserInterface.*;
+import static utils.Constants.UserInterface.Buttons.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -54,15 +55,12 @@ public class ButtonInMenu {
     public boolean isMouseOver() {
         return mouseOver;
     }
-
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
     }
-
     public boolean isMousePressed() {
         return mousePressed;
     }
-
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
     }
