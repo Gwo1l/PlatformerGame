@@ -1,12 +1,10 @@
-package userInterface;
+package ui;
 
-import utils.LoadSave;
+import utilz.LoadSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import static utils.Constants.UserInterface.VolumeButtons.*;
-import static utils.Constants.UserInterface.URMbuttons.URM_DEFAULT_SIZE;
-import static utils.Constants.UserInterface.URMbuttons.URM_SIZE;
+import static utilz.Constants.UserInterface.VolumeButtons.*;
 
 public class VolumeButton extends PauseButton {
     private BufferedImage[] images;

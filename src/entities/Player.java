@@ -1,17 +1,13 @@
 package entities;
 
 import main.Game;
-import utils.LoadSave;
+import utilz.LoadSave;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import static utils.HelpMethods.*;
-import static utils.Constants.Directions.*;
-import static utils.Constants.Directions.UP;
-import static utils.Constants.PlayerConstants.*;
+
+import static utilz.HelpMethods.*;
+import static utilz.Constants.PlayerConstants.*;
 
 public class Player extends Entitiy {
     private BufferedImage[][] animations;

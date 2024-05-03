@@ -1,6 +1,4 @@
-package utils;
-
-import main.Game;
+package utilz;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,6 +18,9 @@ public class LoadSave {
     public static final String URM_BUTTONS = "urm_buttons.png";
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
     public static final String ELDEN_RING_BACKGROUND = "elden_ring.jpg";
+    public static final String PLAYING_BG_IMG = "playing_bg_img.png";
+    public static final String BIG_CLOUDS = "big_clouds.png";
+    public static final String SMALL_CLOUDS = "small_clouds.png";
     public static BufferedImage getSpriteAtlas(String fileName) {
         BufferedImage img;
         InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);

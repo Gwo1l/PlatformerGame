@@ -1,10 +1,10 @@
-package userInterface;
+package ui;
 
-import utils.LoadSave;
+import utilz.LoadSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import static utils.Constants.UserInterface.URMbuttons.*;
+import static utilz.Constants.UserInterface.URMbuttons.*;
 public class UnpauseReplayMenuButton extends PauseButton{
     BufferedImage[] images;
     private boolean mouseOver, mousePressed;

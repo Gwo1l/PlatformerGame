@@ -1,8 +1,8 @@
 package gamestates;
 
 import main.Game;
-import userInterface.ButtonInMenu;
-import utils.LoadSave;
+import ui.ButtonInMenu;
+import utilz.LoadSave;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

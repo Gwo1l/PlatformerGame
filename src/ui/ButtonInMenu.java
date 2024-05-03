@@ -1,9 +1,9 @@
-package userInterface;
+package ui;
 
 import gamestates.Gamestate;
-import utils.LoadSave;
-import static utils.Constants.UserInterface.*;
-import static utils.Constants.UserInterface.Buttons.*;
+import utilz.LoadSave;
+
+import static utilz.Constants.UserInterface.Buttons.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

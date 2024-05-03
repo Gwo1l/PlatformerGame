@@ -1,10 +1,10 @@
-package userInterface;
+package ui;
 
-import utils.LoadSave;
+import utilz.LoadSave;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import static utils.Constants.UserInterface.PauseButtons.*;
+import static utilz.Constants.UserInterface.PauseButtons.*;
 public class SoundButton extends PauseButton{
     private boolean mousePressed, mouseOver;
     private boolean muted;

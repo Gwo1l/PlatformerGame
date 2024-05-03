@@ -2,12 +2,17 @@ package gamestates;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
-import userInterface.PauseOverlay;
-import utils.LoadSave;
+import ui.PauseOverlay;
+import utilz.LoadSave;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import static utilz.Constants.Environment.*;
 
 public class Playing extends State implements StateMethods {
     private int playerYPosition = 160;
@@ -25,9 +30,20 @@ public class Playing extends State implements StateMethods {
     private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
     private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
 
+    private BufferedImage backgroundImg, bigCloud, smallCloud;
+    private int[] smallCloudsPos;
+    private Random rnd = new Random();
+
     public Playing(Game game) {
         super(game);
         initClasses();
+
+        backgroundImg = LoadSave.getSpriteAtlas(LoadSave.PLAYING_BG_IMG);
+        bigCloud = LoadSave.getSpriteAtlas(LoadSave.BIG_CLOUDS);
+        smallCloud = LoadSave.getSpriteAtlas(LoadSave.SMALL_CLOUDS);
+        smallCloudsPos = new int[8];
+        for (int i = 0; i < smallCloudsPos.length; i++)
+            smallCloudsPos[i] = (int) (90 * Game.SCALE) + rnd.nextInt((int) (100 * Game.SCALE));
     }
 
     private void initClasses() {
@@ -75,6 +91,8 @@ public class Playing extends State implements StateMethods {
 
     @Override
     public void draw(Graphics g) {
+        g.drawImage(backgroundImg, 0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT, null);
+        drawClouds(g);
         levelManager.draw(g, xLvlOffset);
         player.render(g, xLvlOffset);
         if (paused) {
@@ -82,6 +100,15 @@ public class Playing extends State implements StateMethods {
             g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
             pauseOverlay.draw(g);
         }
+    }
+    private void drawClouds(Graphics g) {
+
+        for (int i = 0; i < 3; i++)
+            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+
+        for (int i = 0; i < smallCloudsPos.length; i++)
+            g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
+
     }
 
     @Override
@@ -131,6 +158,7 @@ public class Playing extends State implements StateMethods {
                 break;
             case KeyEvent.VK_ESCAPE:
                 paused = !paused;
+                break;
         }
     }
 
@@ -151,4 +179,5 @@ public class Playing extends State implements StateMethods {
     public void unpauseGame() {
         paused = false;
     }
+
 }

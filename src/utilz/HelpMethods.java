@@ -1,8 +1,7 @@
-package utils;
+package utilz;
 
 import main.Game;
 
-import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class HelpMethods {

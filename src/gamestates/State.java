@@ -1,7 +1,7 @@
 package gamestates;
 
 import main.Game;
-import userInterface.ButtonInMenu;
+import ui.ButtonInMenu;
 
 import java.awt.event.MouseEvent;
 
