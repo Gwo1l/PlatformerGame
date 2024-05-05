@@ -1,5 +1,10 @@
 package entities;
 
+import static utilz.Constants.PlayerConstants.*;
+import static utilz.HelpMethods.*;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
 import main.Game;
 import utilz.LoadSave;
 
@@ -11,7 +16,7 @@ import static utilz.Constants.PlayerConstants.*;
 
 public class Player extends Entitiy {
     private BufferedImage[][] animations;
-    private boolean moving = false;
+    private boolean moving = false, attacking = false;
     private int aniTick, aniIndex, aniSpeed = 18;
     private int playerAction = IDLE;
     private int playerDirection = -1;
@@ -42,7 +47,46 @@ public class Player extends Entitiy {
 
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset) - lvlOffset, (int)(hitbox.y - yHitboxOffset), 53, 63, null);
-        //drawHitbox(g);
+        //drawHitbox(g, lvlOffset);
+    }
+    private void setAnimation() {
+        int startAnimation = playerAction;
+
+        if (moving)
+            playerAction = RUNNING;
+        else
+            playerAction = IDLE;
+
+        /*if (inAir) {
+            if (airSpeed < 0) {
+                playerAction = JUMP;
+            }
+            else {
+                playerAction = FALLadING;
+            }
+        }*/
+
+        if (jump) playerAction = JUMP;
+
+        if (startAnimation != playerAction)
+            resetAnimationTick();
+    }
+
+    private void resetAnimationTick() {
+        aniTick = 0;
+        aniIndex = 0;
+    }
+
+    private void updateAnimationTick() {
+        aniTick++;
+        if (aniTick >= aniSpeed) {
+            aniTick = 0;
+            aniIndex++;
+            if (aniIndex >= getSpriteAmount(playerAction)) {
+                aniIndex = 0;
+                jump = false;
+            }
+        }
     }
 
 
@@ -124,45 +168,7 @@ public class Player extends Entitiy {
         }
     }
 
-    private void setAnimation() {
-        int startAnimation = playerAction;
 
-        if (moving)
-            playerAction = RUNNING;
-        else
-            playerAction = IDLE;
-
-        /*if (inAir) {
-            if (airSpeed < 0) {
-                playerAction = JUMP;
-            }
-            else {
-                playerAction = FALLING;
-            }
-        }*/
-
-        if (jump) playerAction = JUMP;
-
-        if (startAnimation != playerAction)
-            resetAnimationTick();
-    }
-
-    private void resetAnimationTick() {
-        aniTick = 0;
-        aniIndex = 0;
-    }
-
-    private void updateAnimationTick() {
-        aniTick++;
-        if (aniTick >= aniSpeed) {
-            aniTick = 0;
-            aniIndex++;
-            if (aniIndex >= getSpriteAmount(playerAction)) {
-                aniIndex = 0;
-                jump = false;
-            }
-        }
-    }
 
     private void loadAnimations() {
         BufferedImage img = LoadSave.getSpriteAtlas(LoadSave.PLAYER_SPRITE);

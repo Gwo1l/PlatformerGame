@@ -56,6 +56,9 @@ public class HelpMethods {
                 return false;
         return true;
     }
+    public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+        return isThatWall(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+    }
 
 
 }

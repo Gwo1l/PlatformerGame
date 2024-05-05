@@ -1,5 +1,9 @@
 package entities;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+
 import gamestates.Playing;
 import utilz.LoadSave;
 
@@ -23,12 +27,11 @@ public class EnemyManager {
 
 	private void addEnemies() {
 		crabbies = LoadSave.getCrabs();
-		System.out.println("size of crabs: " + crabbies.size());
 	}
 
-	public void update() {
+	public void update(int[][] lvlData) {
 		for (Crabby c : crabbies)
-			c.update();
+			c.update(lvlData);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
@@ -37,8 +40,8 @@ public class EnemyManager {
 
 	private void drawCrabs(Graphics g, int xLvlOffset) {
 		for (Crabby c : crabbies)
-			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset, (int) c.getHitbox().y, CRABBY_WIDTH, CRABBY_HEIGHT, null);
-
+			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X, (int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH,
+					CRABBY_HEIGHT, null);
 	}
 
 	private void loadEnemyImgs() {
