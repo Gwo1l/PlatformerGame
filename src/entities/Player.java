@@ -8,13 +8,7 @@ import java.awt.image.BufferedImage;
 import main.Game;
 import utilz.LoadSave;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import static utilz.HelpMethods.*;
-import static utilz.Constants.PlayerConstants.*;
-
-public class Player extends Entitiy {
+public class Player extends Entity {
     private BufferedImage[][] animations;
     private boolean moving = false, attacking = false;
     private int aniTick, aniIndex, aniSpeed = 18;

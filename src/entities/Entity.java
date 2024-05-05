@@ -3,11 +3,11 @@ package entities;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
-public abstract class Entitiy {
+public abstract class Entity {
     protected float x, y;
     protected int height, width;
     protected Rectangle2D.Float hitbox;
-    public Entitiy(float x, float y, int width, int height) {
+    public Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
