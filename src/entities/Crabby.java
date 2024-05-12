@@ -48,18 +48,18 @@ public class Crabby extends Enemy {
 					newState(RUNNING);
 					break;
 				case RUNNING:
-					if (canSeePlayer(lvlData, player))
+					if (canSeePlayer(lvlData, player)) {
 						turnTowardsPlayer(player);
-					if (isPlayerCloseForAttack(player))
-						newState(ATTACK);
+						if (isPlayerCloseForAttack(player))
+							newState(ATTACK);
+					}
 
 					move(lvlData);
 					break;
 				case ATTACK:
-					if(aniIndex == 0)
+					if (aniIndex == 0)
 						attackChecked = false;
-
-					if(aniIndex == 3 && !attackChecked)
+					if (aniIndex == 3 && !attackChecked)
 						checkEnemyHit(attackBox, player);
 					break;
 				case HIT:
@@ -71,16 +71,17 @@ public class Crabby extends Enemy {
 
 	public void drawAttackBox(Graphics g, int xLvlOffset) {
 		g.setColor(Color.red);
-		g.drawRect((int)(attackBox.x - xLvlOffset), (int)attackBox.y, (int)attackBox.width, (int)attackBox.height);
+		g.drawRect((int) (attackBox.x - xLvlOffset), (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
 	}
 
 	public int flipX() {
 		if (walkDir == RIGHT)
 			return width;
-		else return 0;
+		else
+			return 0;
 	}
 
-	public int flipY() {
+	public int flipW() {
 		if (walkDir == RIGHT)
 			return -1;
 		else

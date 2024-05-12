@@ -66,6 +66,12 @@ public class Player extends Entity {
         initAttackBox();
     }
 
+    public void setSpawn(Point spawn) {
+        this.x = spawn.x;
+        this.y = spawn.y;
+        hitbox.x = x;
+        hitbox.y = y;
+    }
     private void initAttackBox() {
         attackBox = new Rectangle2D.Float(x, y, (int)(20 * Game.SCALE), (int)(20 * Game.SCALE));
     }
@@ -208,7 +214,7 @@ public class Player extends Entity {
         }
 
         if (inAir) {
-            if (canIMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.height, hitbox.width, lvlData)) {
+            if (canIMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
                 hitbox.y += airSpeed;
                 airSpeed += gravitiy;
                 updateXPos(xSpeed);
@@ -230,7 +236,7 @@ public class Player extends Entity {
         moving = true;
 
 
-        /*if (canIMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.height, hitbox.width, lvlData)) {
+        /*if (canIMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.weight, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
             hitbox.y += ySpeed;
             moving = true;

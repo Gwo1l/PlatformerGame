@@ -5,6 +5,7 @@ import gamestates.Gamestate;
 import gamestates.Playing;
 import gamestates.Menu;
 import levels.LevelManager;
+import utilz.LoadSave;
 
 import java.awt.*;
 
@@ -31,14 +32,15 @@ public class Game implements Runnable{
 	public static final int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
 	public static final int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
 	public static final int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
-	private LevelManager levelManager;
-	private Player player;
 	
 	public Game() {
 		initClasses();
+
 		gamePanel = new GamePanel(this);
 		gameWindow = new GameWindow(gamePanel);
+		gamePanel.setFocusable(true);
 		gamePanel.requestFocus();
+
 		startGameLoop();
 	}
 

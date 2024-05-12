@@ -4,9 +4,11 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public abstract class Entity {
+
     protected float x, y;
     protected int height, width;
     protected Rectangle2D.Float hitbox;
+
     public Entity(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;

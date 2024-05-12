@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import gamestates.Playing;
+import levels.Level;
 import utilz.LoadSave;
 
 import java.awt.*;
@@ -23,17 +24,21 @@ public class EnemyManager {
 	public EnemyManager(Playing playing) {
 		this.playing = playing;
 		loadEnemyImgs();
-		addEnemies();
 	}
 
-	private void addEnemies() {
-		crabbies = LoadSave.getCrabs();
+	public void loadEnemies(Level level) {
+		crabbies = level.getCrabs();
 	}
 
 	public void update(int[][] lvlData, Player player) {
+		boolean isAnyActive = false;
 		for (Crabby c : crabbies)
-			if (c.isActive())
+			if (c.isActive()) {
 				c.update(lvlData, player);
+				isAnyActive = true;
+			}
+		if (!isAnyActive)
+			playing.setLevelCompleted(true);
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
@@ -43,7 +48,7 @@ public class EnemyManager {
 	private void drawCrabs(Graphics g, int xLvlOffset) {
 		for (Crabby c : crabbies) {
 			if (c.isActive()) {
-				g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X + c.flipX(), (int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH * c.flipY(), CRABBY_HEIGHT, null);
+				g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X + c.flipX(), (int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH * c.flipW(), CRABBY_HEIGHT, null);
 				//c.drawHitbox(g, xLvlOffset);
 				//c.drawAttackBox(g, xLvlOffset);
 			}

@@ -40,7 +40,7 @@ public abstract class Enemy extends Entity {
 	}
 
 	protected void updateInAir(int[][] lvlData) {
-		if (canIMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.height, hitbox.width, lvlData)) {
+		if (canIMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.width, hitbox.height, lvlData)) {
 			hitbox.y += fallSpeed;
 			fallSpeed += gravity;
 		} else {
@@ -58,7 +58,7 @@ public abstract class Enemy extends Entity {
 		else
 			xSpeed = walkSpeed;
 
-		if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.height, hitbox.width, lvlData))
+		if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData))
 			if (IsFloor(hitbox, xSpeed, lvlData)) {
 				hitbox.x += xSpeed;
 				return;
@@ -102,7 +102,7 @@ public abstract class Enemy extends Entity {
 
 	public void hurt(int amount) {
 		currentHealth -= amount;
-		if(currentHealth <= 0)
+		if (currentHealth <= 0)
 			newState(DEAD);
 		else
 			newState(HIT);
@@ -170,8 +170,8 @@ public abstract class Enemy extends Entity {
 			if (aniIndex >= getSpriteAmount(enemyType, enemyState)) {
 				aniIndex = 0;
 
-				switch (enemyState){
-					case ATTACK,HIT -> enemyState = IDLE;
+				switch (enemyState) {
+					case ATTACK, HIT -> enemyState = IDLE;
 					case DEAD -> active = false;
 				}
 			}
@@ -204,7 +204,7 @@ public abstract class Enemy extends Entity {
 		return enemyState;
 	}
 
-	public boolean isActive(){
+	public boolean isActive() {
 		return active;
 	}
 
