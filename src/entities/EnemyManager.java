@@ -37,8 +37,9 @@ public class EnemyManager {
 				c.update(lvlData, player);
 				isAnyActive = true;
 			}
-		if (!isAnyActive)
+		if (!isAnyActive) {
 			playing.setLevelCompleted(true);
+		}
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {

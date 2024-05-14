@@ -58,7 +58,7 @@ public class Playing extends State implements StateMethods {
     }
 
     public void setLevelCompleted(boolean levelCompleted) {
-        this.lvlCompleted = lvlCompleted;
+        this.lvlCompleted = levelCompleted;
     }
 
     public void loadNextLevel() {
@@ -138,15 +138,18 @@ public class Playing extends State implements StateMethods {
         player.render(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
 
+        System.out.println(lvlCompleted);
+
         if (paused) {
             g.setColor(new Color(0, 0, 0, 160));
             g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
             pauseOverlay.draw(g);
-        }else if(gameOver)
+        }else if(gameOver) {
             gameOverOverlay.draw(g);
-        else if(lvlCompleted)
+        }else if(lvlCompleted) {
+            System.out.println("svo3");
             levelCompletedOverlay.draw(g);
-
+        }
     }
 
     private void drawClouds(Graphics g) {
@@ -178,9 +181,9 @@ public class Playing extends State implements StateMethods {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(!gameOver)
-            if (paused) {
-                pauseOverlay.mouseClicked(e);
-            }
+            if (e.getButton() == MouseEvent.BUTTON1)
+                player.setAttacking(true);
+
     }
     public void mouseDragged(MouseEvent e) {
         if (!gameOver)

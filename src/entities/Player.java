@@ -77,14 +77,14 @@ public class Player extends Entity {
     }
 
     public void update() {
+        updateHealthBar();
         if(currentHealth <= 0) {
             playing.setGameOver(true);
             return;
         }
-        updateHealthBar();
         updateAttackBox();
-
         updatePos();
+
         if(attacking)
             checkAttack();
         updateAnimationTick();
@@ -102,9 +102,13 @@ public class Player extends Entity {
         if(right) {
             attackBox.x = hitbox.x + hitbox.width + (int)(Game.SCALE * 10);
         }else if(left) {
-            attackBox.x = hitbox.x + hitbox.width + (int)(Game.SCALE * 10);
+            attackBox.x = hitbox.x - hitbox.width - (int)(Game.SCALE * 10);
         }
         attackBox.y = hitbox.y + (Game.SCALE * 10);
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.attacking = attacking;
     }
 
     private void updateHealthBar() {
@@ -113,7 +117,7 @@ public class Player extends Entity {
 
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset) - lvlOffset + flipX, (int)(hitbox.y - yHitboxOffset), 53 * flipW, 63, null);
-        //drawHitbox(g, lvlOffset);
+        // drawHitbox(g, lvlOffset);
         drawAttackBox(g, lvlOffset);
         drawUI(g);
     }
@@ -132,28 +136,24 @@ public class Player extends Entity {
     private void setAnimation() {
         int startAnimation = playerAction;
 
-        if (moving)
+        if (moving) {
+            System.out.println("running");
             playerAction = RUNNING;
-        else
+        }
+        else {
+            System.out.println("idling");
             playerAction = IDLE;
-
-        /*if (inAir) {
-            if (airSpeed < 0) {
-                playerAction = JUMP;
-            }
-            else {
-                playerAction = FALLadING;
-            }
         }
 
-        if(attacking) {
+        if (attacking) {
+            System.out.println("attacking");
             playerAction = ATTACK;
             if(startAnimation != ATTACK){
-                aniIndex = 1;
+                aniIndex = 2;
                 aniTick = 0;
                 return;
             }
-        }*/
+        }
 
         if (jump) playerAction = JUMP;
 
@@ -174,6 +174,7 @@ public class Player extends Entity {
             if (aniIndex >= getSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 jump = false;
+                attacking = false;
                 attackChecked = false;
             }
         }
@@ -234,13 +235,6 @@ public class Player extends Entity {
             updateXPos(xSpeed);
         }
         moving = true;
-
-
-        /*if (canIMoveHere(hitbox.x + xSpeed, hitbox.y + ySpeed, hitbox.weight, hitbox.height, lvlData)) {
-            hitbox.x += xSpeed;
-            hitbox.y += ySpeed;
-            moving = true;
-        }*/
     }
 
     private void jump() {
