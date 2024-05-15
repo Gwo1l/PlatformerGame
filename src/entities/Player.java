@@ -7,7 +7,9 @@ import static utilz.HelpMethods.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import bullets.Bullet;
 import gamestates.Playing;
 import main.Game;
 import utilz.LoadSave;
@@ -17,7 +19,6 @@ public class Player extends Entity {
     private boolean moving = false, attacking = false;
     private int aniTick, aniIndex, aniSpeed = 18;
     private int playerAction = IDLE;
-    private int playerDirection = -1;
     private boolean left, right, up, down, jump;
     private int spriteWidth = 80;
     private int spriteHeight = 94;
@@ -31,6 +32,9 @@ public class Player extends Entity {
     private float jumpSpeed = -2.25f * Game.SCALE;
     private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
     private boolean inAir = false;
+
+    //Bullets
+    public ArrayList<Bullet> bullets = new ArrayList<>();
 
     //StatusBarUI
     private BufferedImage statusBarImg;
@@ -89,6 +93,9 @@ public class Player extends Entity {
             checkAttack();
         updateAnimationTick();
         setAnimation();
+        for(Bullet b : bullets) {
+            b.updatePos();
+        }
     }
 
     private void checkAttack() {
@@ -109,6 +116,7 @@ public class Player extends Entity {
 
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
+        bullets.add(new Bullet(hitbox.x, hitbox.y - 15, flipW));
     }
 
     private void updateHealthBar() {
@@ -137,16 +145,13 @@ public class Player extends Entity {
         int startAnimation = playerAction;
 
         if (moving) {
-            System.out.println("running");
             playerAction = RUNNING;
         }
         else {
-            System.out.println("idling");
             playerAction = IDLE;
         }
 
         if (attacking) {
-            System.out.println("attacking");
             playerAction = ATTACK;
             if(startAnimation != ATTACK){
                 aniIndex = 2;

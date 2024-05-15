@@ -8,8 +8,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static main.Game.TILES_SIZE;
-
 public class LevelManager {
     private Game game;
     private BufferedImage[] levelSprite;

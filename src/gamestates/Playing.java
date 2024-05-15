@@ -1,4 +1,5 @@
 package gamestates;
+import bullets.Bullet;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
@@ -65,6 +66,7 @@ public class Playing extends State implements StateMethods {
         resetAll();
         levelManager.loadNextLevel();
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
+        player.bullets.clear();
     }
 
     private void loadStartLevel() {
@@ -137,8 +139,10 @@ public class Playing extends State implements StateMethods {
         levelManager.draw(g, xLvlOffset);
         player.render(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
-
-        System.out.println(lvlCompleted);
+        for(Bullet b : player.bullets) {
+            b.draw(g, xLvlOffset);
+            b.drawHitbox(g, xLvlOffset);
+        }
 
         if (paused) {
             g.setColor(new Color(0, 0, 0, 160));
@@ -147,7 +151,6 @@ public class Playing extends State implements StateMethods {
         }else if(gameOver) {
             gameOverOverlay.draw(g);
         }else if(lvlCompleted) {
-            System.out.println("svo3");
             levelCompletedOverlay.draw(g);
         }
     }
