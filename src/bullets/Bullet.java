@@ -18,7 +18,7 @@ public class Bullet {
     private boolean active;
 
     public Bullet(float x, float y, int dir) {
-        hitbox = new Rectangle2D.Float(x, y, 6, 6);
+        hitbox = new Rectangle2D.Float(x, y + 25, 6, 6);
         this.dir = dir;
     }
 
@@ -28,7 +28,7 @@ public class Bullet {
 
     public void draw(Graphics g, int xLvlOffset) {
         if (isActive())
-            g.drawImage(bulletImg, (int) (hitbox.x - xLvlOffset), (int) (hitbox.y), null);
+            g.drawImage(bulletImg, (int) (hitbox.x - xLvlOffset), (int) (hitbox.y), (int)hitbox.width, (int)hitbox.height, null);
     }
 
     private void setPos(int x, int y) {

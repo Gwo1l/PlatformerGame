@@ -18,6 +18,7 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
 
 	private Playing playing;
+	private Player player;
 	private BufferedImage[][] crabbyArr;
 	private ArrayList<Crabby> crabbies = new ArrayList<>();
 

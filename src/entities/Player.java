@@ -94,6 +94,7 @@ public class Player extends Entity {
         updateAnimationTick();
         setAnimation();
         for(Bullet b : bullets) {
+            b.setActive(true);
             b.updatePos();
         }
     }
@@ -103,6 +104,12 @@ public class Player extends Entity {
             return;
         attackChecked = true;
         playing.checkEnemyHit(attackBox);
+        int ind = 0;
+        for(int i = 0; i < bullets.size(); i++) {
+            playing.checkEnemyHit(bullets.get(i).getHitbox());
+            bullets.remove(i);
+        }
+
     }
 
     private void updateAttackBox() {
