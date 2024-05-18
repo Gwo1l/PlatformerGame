@@ -1,5 +1,6 @@
 package utilz;
 
+import bullets.Bullet;
 import entities.Crabby;
 import main.Game;
 
@@ -18,6 +19,10 @@ public class HelpMethods {
                     if (!isThatWall(x + width, y + height, lvlData))
                         return true;
         return false;
+    }
+
+    public static boolean isBulletHittingLevel(Bullet b, int[][] lvlData){
+        return isThatWall(b.getHitbox().x + b.getHitbox().width, b.getHitbox().y + b.getHitbox().height, lvlData);
     }
 
     public static boolean isThatWall(float x, float y, int[][] lvlData) {

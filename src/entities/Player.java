@@ -26,6 +26,7 @@ public class Player extends Entity {
     private float xHitboxOffset = 9 * Game.SCALE;
     private float yHitboxOffset = 8 * Game.SCALE;
     private int[][] lvlData;
+    private EnemyManager em;
 
     private float airSpeed = 0f;
     private float gravitiy = 0.04f * Game.SCALE;
@@ -90,7 +91,8 @@ public class Player extends Entity {
         updatePos();
 
         if(attacking)
-            checkAttack();
+            System.out.println("svo");
+        checkAttack();
         updateAnimationTick();
         setAnimation();
         for(Bullet b : bullets) {
@@ -99,16 +101,30 @@ public class Player extends Entity {
         }
     }
 
+//    private void updateBullet(ArrayList<Crabby> crabbies, int [][]lvlData){
+//        for(Bullet b: bullets)
+//            for(Crabby c: crabbies)
+//                if(b.isActive()) {
+//                    b.updatePos();
+//                    if(b.getHitbox().intersects(c.getHitbox())) {
+//                        c.hurt(10);
+//                        b.setActive(false);
+//                    }else if(isBulletHittingLevel(b, lvlData))
+//                        b.setActive(false);
+//                }
+//    };
+
     private void checkAttack() {
         if(attackChecked || aniIndex != 1)
             return;
         attackChecked = true;
-        playing.checkEnemyHit(attackBox);
-        int ind = 0;
-        for(int i = 0; i < bullets.size(); i++) {
-            playing.checkEnemyHit(bullets.get(i).getHitbox());
-            bullets.remove(i);
-        }
+        for(Bullet b: bullets)
+            playing.checkEnemyHit(b, lvlData);
+//        for(int i = 0; i < bullets.size(); i++) {
+//            playing.checkEnemyHit(bullets.get(i).getHitbox());
+//            bullets.remove(i);
+//        }
+        //updateBullet(em.getCrabbies(), lvlData);
 
     }
 
@@ -123,7 +139,7 @@ public class Player extends Entity {
 
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
-        bullets.add(new Bullet(hitbox.x, hitbox.y - 15, flipW));
+        bullets.add(new Bullet(hitbox.x, hitbox.y, flipW));
     }
 
     private void updateHealthBar() {
@@ -133,7 +149,7 @@ public class Player extends Entity {
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset) - lvlOffset + flipX, (int)(hitbox.y - yHitboxOffset), 53 * flipW, 63, null);
         // drawHitbox(g, lvlOffset);
-        drawAttackBox(g, lvlOffset);
+        // drawAttackBox(g, lvlOffset);
         drawUI(g);
     }
 
@@ -262,7 +278,7 @@ public class Player extends Entity {
     }
 
     private void updateXPos(float xSpeed) {
-        if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.height, hitbox.width, lvlData)) {
+        if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
         }
         else {

@@ -108,59 +108,59 @@ public abstract class Enemy extends Entity {
 			newState(HIT);
 	}
 
-	protected void checkEnemyHit(Rectangle2D.Float attackBox, Player player) {
+	protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player) {
 		if (attackBox.intersects(player.hitbox))
 			player.changeHealth(-GetEnemyDmg(enemyType));
 		attackChecked = true;
 	}
 
-	public void update(int[][] lvlData) {
-		updateMove(lvlData);
-		updateAnimationTick();
-
-	}
-
-	private void updateMove(int[][] lvlData) {
-		if (firstUpdate) {
-			if (!areWeOnFloor(hitbox, lvlData))
-				inAir = true;
-			firstUpdate = false;
-		}
-
-		if (inAir) {
-			if (canIMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.height, hitbox.width, lvlData)) {
-				hitbox.y += fallSpeed;
-				fallSpeed += gravity;
-			} else {
-				inAir = false;
-				hitbox.y = getEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
-			}
-		} else {
-			switch (enemyState) {
-			case IDLE:
-				enemyState = RUNNING;
-				break;
-			case RUNNING:
-				float xSpeed = 0;
-
-				if (walkDir == LEFT)
-					xSpeed = -walkSpeed;
-				else
-					xSpeed = walkSpeed;
-
-				if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.height, hitbox.width, lvlData))
-					if (IsFloor(hitbox, xSpeed, lvlData)) {
-						hitbox.x += xSpeed;
-						return;
-					}
-
-				changeWalkDir();
-
-				break;
-			}
-		}
-
-	}
+//	public void update(int[][] lvlData) {
+//		updateMove(lvlData);
+//		updateAnimationTick();
+//
+//	}
+//
+//	private void updateMove(int[][] lvlData) {
+//		if (firstUpdate) {
+//			if (!areWeOnFloor(hitbox, lvlData))
+//				inAir = true;
+//			firstUpdate = false;
+//		}
+//
+//		if (inAir) {
+//			if (canIMoveHere(hitbox.x, hitbox.y + fallSpeed, hitbox.height, hitbox.width, lvlData)) {
+//				hitbox.y += fallSpeed;
+//				fallSpeed += gravity;
+//			} else {
+//				inAir = false;
+//				hitbox.y = getEntityYPosUnderRoofOrAboveFloor(hitbox, fallSpeed);
+//			}
+//		} else {
+//			switch (enemyState) {
+//			case IDLE:
+//				enemyState = RUNNING;
+//				break;
+//			case RUNNING:
+//				float xSpeed = 0;
+//
+//				if (walkDir == LEFT)
+//					xSpeed = -walkSpeed;
+//				else
+//					xSpeed = walkSpeed;
+//
+//				if (canIMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.height, hitbox.width, lvlData))
+//					if (IsFloor(hitbox, xSpeed, lvlData)) {
+//						hitbox.x += xSpeed;
+//						return;
+//					}
+//
+//				changeWalkDir();
+//
+//				break;
+//			}
+//		}
+//
+//	}
 
 	protected void updateAnimationTick() {
 		aniTick++;

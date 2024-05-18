@@ -1,5 +1,6 @@
 package bullets;
 
+import entities.Crabby;
 import entities.Player;
 import main.Game;
 import utilz.LoadSave;
@@ -7,6 +8,7 @@ import utilz.LoadSave;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import static utilz.LoadSave.BULLET_IMAGE;
 
@@ -14,11 +16,10 @@ public class Bullet {
     private Rectangle2D.Float hitbox;
     private int dir;
     private BufferedImage bulletImg = LoadSave.getSpriteAtlas(BULLET_IMAGE);
-    private Player player;
     private boolean active;
 
     public Bullet(float x, float y, int dir) {
-        hitbox = new Rectangle2D.Float(x, y + 25, 6, 6);
+        hitbox = new Rectangle2D.Float(x, y + 10, 6, 10);
         this.dir = dir;
     }
 

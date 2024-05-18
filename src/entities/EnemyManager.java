@@ -5,6 +5,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import bullets.Bullet;
 import gamestates.Playing;
 import levels.Level;
 import utilz.LoadSave;
@@ -14,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import static utilz.Constants.EnemyConstants.*;
+import static utilz.HelpMethods.isBulletHittingLevel;
 
 public class EnemyManager {
 
@@ -57,14 +59,27 @@ public class EnemyManager {
 		}
 	}
 
-	public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for(Crabby c: crabbies) {
-			if (c.isActive())
-				if (attackBox.intersects(c.getHitbox())) {
-					c.hurt(10);
-					return;
+//	public void checkEnemyHit(Rectangle2D.Float attackBox) {
+//		for(Crabby c: crabbies) {
+//			if (c.isActive())
+//				if (attackBox.intersects(c.getHitbox())) {
+//					c.hurt(10);
+//					return;
+//				}
+//		}
+//	}
+
+	public void checkEnemyHit(Bullet bullet, int[][]lvlData) {
+		for(Crabby c: crabbies)
+				if(bullet.isActive()) {
+					bullet.updatePos();
+					if(bullet.getHitbox().intersects(c.getHitbox())) {
+						c.hurt(10);
+						System.out.println(bullet.getHitbox().intersects(c.getHitbox()));
+						bullet.setActive(false);
+					}else if(isBulletHittingLevel(bullet, lvlData))
+						bullet.setActive(false);
 				}
-		}
 	}
 
 	private void loadEnemyImgs() {
@@ -79,4 +94,13 @@ public class EnemyManager {
 		for(Crabby c: crabbies)
 			c.resetEnemy();
 	}
+
+	public ArrayList<Crabby> getCrabbies() {
+		return crabbies;
+	}
+
+	public void setCrabbies(ArrayList<Crabby> crabbies) {
+		this.crabbies = crabbies;
+	}
+
 }
