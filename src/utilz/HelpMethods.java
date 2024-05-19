@@ -22,7 +22,7 @@ public class HelpMethods {
     }
 
     public static boolean isBulletHittingLevel(Bullet b, int[][] lvlData){
-        return isThatWall(b.getHitbox().x + b.getHitbox().width, b.getHitbox().y + b.getHitbox().height, lvlData);
+        return isThatWall(b.getHitbox().x + b.getHitbox().width / 2, b.getHitbox().y + b.getHitbox().height / 2, lvlData);
     }
 
     public static boolean isThatWall(float x, float y, int[][] lvlData) {

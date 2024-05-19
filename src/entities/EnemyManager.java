@@ -1,7 +1,6 @@
 package entities;
 
 import java.awt.Graphics;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -10,17 +9,12 @@ import gamestates.Playing;
 import levels.Level;
 import utilz.LoadSave;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-
 import static utilz.Constants.EnemyConstants.*;
 import static utilz.HelpMethods.isBulletHittingLevel;
 
 public class EnemyManager {
 
 	private Playing playing;
-	private Player player;
 	private BufferedImage[][] crabbyArr;
 	private ArrayList<Crabby> crabbies = new ArrayList<>();
 
@@ -52,27 +46,15 @@ public class EnemyManager {
 	private void drawCrabs(Graphics g, int xLvlOffset) {
 		for (Crabby c : crabbies) {
 			if (c.isActive()) {
-				g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X + c.flipX(), (int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH * c.flipW(), CRABBY_HEIGHT, null);
-				//c.drawHitbox(g, xLvlOffset);
-				//c.drawAttackBox(g, xLvlOffset);
+				g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X + c.flipX(),
+						(int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH * c.flipW(), CRABBY_HEIGHT, null);
 			}
 		}
 	}
 
-//	public void checkEnemyHit(Rectangle2D.Float attackBox) {
-//		for(Crabby c: crabbies) {
-//			if (c.isActive())
-//				if (attackBox.intersects(c.getHitbox())) {
-//					c.hurt(10);
-//					return;
-//				}
-//		}
-//	}
-
 	public void checkEnemyHit(Bullet bullet, int[][]lvlData) {
 		for(Crabby c: crabbies)
 				if(bullet.isActive()) {
-					bullet.updatePos();
 					if(bullet.getHitbox().intersects(c.getHitbox())) {
 						c.hurt(10);
 						System.out.println(bullet.getHitbox().intersects(c.getHitbox()));

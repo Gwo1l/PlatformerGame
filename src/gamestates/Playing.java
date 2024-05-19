@@ -1,6 +1,5 @@
 package gamestates;
 import bullets.Bullet;
-import entities.Crabby;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
@@ -14,9 +13,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static utilz.Constants.Environment.*;
@@ -68,7 +65,6 @@ public class Playing extends State implements StateMethods {
         resetAll();
         levelManager.loadNextLevel();
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
-        player.bullets.clear();
     }
 
     private void loadStartLevel() {
@@ -141,12 +137,10 @@ public class Playing extends State implements StateMethods {
         levelManager.draw(g, xLvlOffset);
         player.render(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
-        for (Crabby c: enemyManager.getCrabbies())
-            c.drawHitbox(g, xLvlOffset);
+
         for(Bullet b : player.bullets) {
             if(b.isActive())
                 b.draw(g, xLvlOffset);
-            b.drawHitbox(g, xLvlOffset);
         }
 
         if (paused) {
@@ -176,6 +170,7 @@ public class Playing extends State implements StateMethods {
         lvlCompleted = false;
         player.resetAll();
         enemyManager.resetAllEnemies();
+        player.bullets.clear();
     }
 
     public void setGameOver(boolean gameOver) {

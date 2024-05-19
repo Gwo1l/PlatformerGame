@@ -87,45 +87,26 @@ public class Player extends Entity {
             playing.setGameOver(true);
             return;
         }
+        for(Bullet b : bullets) {
+            if(b.isActive()) {
+                b.updatePos();
+            }
+        }
         updateAttackBox();
         updatePos();
 
-        if(attacking)
-            System.out.println("svo");
         checkAttack();
         updateAnimationTick();
         setAnimation();
-        for(Bullet b : bullets) {
-            b.setActive(true);
-            b.updatePos();
-        }
     }
 
-//    private void updateBullet(ArrayList<Crabby> crabbies, int [][]lvlData){
-//        for(Bullet b: bullets)
-//            for(Crabby c: crabbies)
-//                if(b.isActive()) {
-//                    b.updatePos();
-//                    if(b.getHitbox().intersects(c.getHitbox())) {
-//                        c.hurt(10);
-//                        b.setActive(false);
-//                    }else if(isBulletHittingLevel(b, lvlData))
-//                        b.setActive(false);
-//                }
-//    };
-
     private void checkAttack() {
-        if(attackChecked || aniIndex != 1)
-            return;
+//        if(attackChecked || aniIndex != 1)
+//            return;
         attackChecked = true;
         for(Bullet b: bullets)
-            playing.checkEnemyHit(b, lvlData);
-//        for(int i = 0; i < bullets.size(); i++) {
-//            playing.checkEnemyHit(bullets.get(i).getHitbox());
-//            bullets.remove(i);
-//        }
-        //updateBullet(em.getCrabbies(), lvlData);
-
+            if(b.isActive())
+                playing.checkEnemyHit(b, lvlData);
     }
 
     private void updateAttackBox() {
