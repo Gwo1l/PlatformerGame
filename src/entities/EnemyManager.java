@@ -54,6 +54,7 @@ public class EnemyManager {
 
 	public void checkEnemyHit(Bullet bullet, int[][]lvlData) {
 		for(Crabby c: crabbies)
+			if(c.isActive())
 				if(bullet.isActive()) {
 					if(bullet.getHitbox().intersects(c.getHitbox())) {
 						c.hurt(10);
