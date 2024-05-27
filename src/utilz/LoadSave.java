@@ -31,6 +31,7 @@ public class LoadSave {
     public static final String STATUS_BAR = "res/health_power_bar.png";
     public static final String COMPLETED_IMAGE = "res/completed_sprite.png";
     public static final String BULLET_IMAGE = "res/ball.png";
+    public static final String DEATH_SCREEN = "res/death_screen.png";
 
     public static BufferedImage getSpriteAtlas(String fileName) {
         BufferedImage img;
@@ -52,7 +53,7 @@ public class LoadSave {
     }
 
     public static BufferedImage[] getAllLevels(){
-        URL url = LoadSave.class.getResource("/lvls");
+        URL url = LoadSave.class.getResource("/res/lvls");
         File file = null;
 
         try {

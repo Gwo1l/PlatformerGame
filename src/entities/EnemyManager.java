@@ -58,7 +58,6 @@ public class EnemyManager {
 				if(bullet.isActive()) {
 					if(bullet.getHitbox().intersects(c.getHitbox())) {
 						c.hurt(10);
-						System.out.println(bullet.getHitbox().intersects(c.getHitbox()));
 						bullet.setActive(false);
 					}else if(isBulletHittingLevel(bullet, lvlData))
 						bullet.setActive(false);
