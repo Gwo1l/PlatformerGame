@@ -15,22 +15,22 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class LoadSave {
-    public static final String PLAYER_SPRITE = "playerSprite.png";
-    public static final String LEVEL_SPRITE = "level_sprites.png";
-    public static final String MENU_BUTTONS = "button_atlas.png";
-    public static final String BACKGROUND_OF_MENU = "menu_background.png";
-    public static final String PAUSE_BACKGROUND = "pause_menu.png";
-    public static final String SOUND_BUTTONS = "sound_button.png";
-    public static final String URM_BUTTONS = "urm_buttons.png";
-    public static final String VOLUME_BUTTONS = "volume_buttons.png";
-    public static final String ELDEN_RING_BACKGROUND = "elden_ring.jpg";
-    public static final String PLAYING_BG_IMG = "playing_bg_img.png";
-    public static final String BIG_CLOUDS = "big_clouds.png";
-    public static final String SMALL_CLOUDS = "small_clouds.png";
-    public static final String CRABBY_SPRITE = "crabby_sprite.png";
-    public static final String STATUS_BAR = "health_power_bar.png";
-    public static final String COMPLETED_IMAGE = "completed_sprite.png";
-    public static final String BULLET_IMAGE = "ball.png";
+    public static final String PLAYER_SPRITE = "res/playerSprite.png";
+    public static final String LEVEL_SPRITE = "res/level_sprites.png";
+    public static final String MENU_BUTTONS = "res/button_atlas.png";
+    public static final String BACKGROUND_OF_MENU = "res/menu_background.png";
+    public static final String PAUSE_BACKGROUND = "res/pause_menu.png";
+    public static final String SOUND_BUTTONS = "res/sound_button.png";
+    public static final String URM_BUTTONS = "res/urm_buttons.png";
+    public static final String VOLUME_BUTTONS = "res/volume_buttons.png";
+    public static final String ELDEN_RING_BACKGROUND = "res/elden_ring.jpg";
+    public static final String PLAYING_BG_IMG = "res/playing_bg_img.png";
+    public static final String BIG_CLOUDS = "res/big_clouds.png";
+    public static final String SMALL_CLOUDS = "res/small_clouds.png";
+    public static final String CRABBY_SPRITE = "res/crabby_sprite.png";
+    public static final String STATUS_BAR = "res/health_power_bar.png";
+    public static final String COMPLETED_IMAGE = "res/completed_sprite.png";
+    public static final String BULLET_IMAGE = "res/ball.png";
 
     public static BufferedImage getSpriteAtlas(String fileName) {
         BufferedImage img;

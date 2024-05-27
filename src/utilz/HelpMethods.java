@@ -32,9 +32,9 @@ public class HelpMethods {
         float xIndex = x / Game.TILES_SIZE;
         float yIndex = y / Game.TILES_SIZE;
 
-        return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
+        return isTileSolid((int) xIndex, (int) yIndex, lvlData);
     }
-    public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
+    public static boolean isTileSolid(int xTile, int yTile, int[][] lvlData) {
         int value = lvlData[yTile][xTile];
 
         if (value >= 48 || value < 0 || value != 11)
@@ -79,9 +79,9 @@ public class HelpMethods {
     }
     public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
         for (int i = 0; i < xEnd - xStart; i++) {
-            if (IsTileSolid(xStart + i, y, lvlData))
+            if (isTileSolid(xStart + i, y, lvlData))
                 return false;
-            if (!IsTileSolid(xStart + i, y + 1, lvlData))
+            if (!isTileSolid(xStart + i, y + 1, lvlData))
                 return false;
         }
 
@@ -99,7 +99,7 @@ public class HelpMethods {
 
     }
 
-    public static int[][] GetLevelData(BufferedImage img) {
+    public static int[][] getLvlData(BufferedImage img) {
         int[][] lvlData = new int[img.getHeight()][img.getWidth()];
         for (int j = 0; j < img.getHeight(); j++) {
             for (int i = 0; i < img.getWidth(); i++) {
@@ -113,7 +113,7 @@ public class HelpMethods {
         return lvlData;
     }
 
-    public static ArrayList<Crabby> GetCrabs(BufferedImage img) {
+    public static ArrayList<Crabby> getCrabs(BufferedImage img) {
         ArrayList<Crabby> list = new ArrayList<>();
         for (int j = 0; j < img.getHeight(); j++)
             for (int i = 0; i < img.getWidth(); i++) {

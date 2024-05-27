@@ -7,8 +7,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static utilz.HelpMethods.GetLevelData;
-import static utilz.HelpMethods.GetCrabs;
+import static utilz.HelpMethods.getLvlData;
+import static utilz.HelpMethods.getCrabs;
 import static utilz.HelpMethods.GetPlayerSpawn;
 
 public class Level {
@@ -40,10 +40,10 @@ public class Level {
     }
 
     private void createEnemies(){
-        crabs = GetCrabs(img);
+        crabs = getCrabs(img);
     }
     private void createLevelData() {
-        lvlData = GetLevelData(img);
+        lvlData = getLvlData(img);
     }
 
     public int getSpriteIndex(int x, int y) {
@@ -58,7 +58,7 @@ public class Level {
         return maxLvlOffsetX;
     }
 
-    public ArrayList<Crabby> getCrabs(){
+    public ArrayList<Crabby> getCrbs(){
         return crabs;
     }
 

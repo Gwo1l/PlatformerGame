@@ -17,10 +17,9 @@ public class PauseOverlay {
     private int soundX = (int)(450 * Game.SCALE);
     private int musicY = (int)(140 * Game.SCALE);
     private int sfxY = (int)(186 * Game.SCALE);
-    private int dialogueY = (int)(232 * Game.SCALE);
     private UnpauseReplayMenuButton menuB, replayB, unpauseB;
     private VolumeButton volumeButton;
-    private SoundButton musicButton, soundEffectsButton, dialogueButton;
+    private SoundButton musicButton, soundEffectsButton;
     private Playing playing;
 
     public PauseOverlay(Playing playing) {
@@ -50,7 +49,6 @@ public class PauseOverlay {
     private void createSoundButtons() {
         musicButton = new SoundButton(soundX, musicY, SOUND_SIZE, SOUND_SIZE);
         soundEffectsButton = new SoundButton(soundX, sfxY, SOUND_SIZE, SOUND_SIZE);
-        //dialogueButton = new SoundButton(soundX, dialogueY, SOUND_SIZE, SOUND_SIZE);
     }
 
     private void loadBackground() {
@@ -144,7 +142,6 @@ public class PauseOverlay {
         else if (isIn(e, unpauseB)) {
             if (unpauseB.isMousePressed()) {
                 playing.unpauseGame();
-                //Gamestate.state = Gamestate.PLAYING;
             }
         }
 

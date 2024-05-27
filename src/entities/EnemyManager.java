@@ -24,7 +24,7 @@ public class EnemyManager {
 	}
 
 	public void loadEnemies(Level level) {
-		crabbies = level.getCrabs();
+		crabbies = level.getCrbs();
 	}
 
 	public void update(int[][] lvlData, Player player) {
@@ -54,7 +54,7 @@ public class EnemyManager {
 
 	public void checkEnemyHit(Bullet bullet, int[][]lvlData) {
 		for(Crabby c: crabbies)
-			if(c.isActive())
+			if(c.isActive()&&c.enemyState!=DEAD)
 				if(bullet.isActive()) {
 					if(bullet.getHitbox().intersects(c.getHitbox())) {
 						c.hurt(10);
