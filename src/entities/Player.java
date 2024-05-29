@@ -35,7 +35,7 @@ public class Player extends Entity {
     private boolean inAir = false;
 
     //Bullets
-    public ArrayList<Bullet> bullets = new ArrayList<>();
+    private ArrayList<Bullet> bullets = new ArrayList<>();
 
     //StatusBarUI
     private BufferedImage statusBarImg;
@@ -129,8 +129,6 @@ public class Player extends Entity {
 
     public void render(Graphics g, int lvlOffset) {
         g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xHitboxOffset) - lvlOffset + flipX, (int)(hitbox.y - yHitboxOffset), 53 * flipW, 63, null);
-        // drawHitbox(g, lvlOffset);
-        // drawAttackBox(g, lvlOffset);
         drawUI(g);
     }
 
@@ -352,5 +350,9 @@ public class Player extends Entity {
         if (!areWeOnFloor(hitbox, lvlData))
             inAir = true;
 
+    }
+
+    public ArrayList<Bullet> getBullets() {
+        return bullets;
     }
 }

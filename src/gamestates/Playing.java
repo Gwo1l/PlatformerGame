@@ -139,7 +139,7 @@ public class Playing extends State implements StateMethods {
         player.render(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
 
-        for(Bullet b : player.bullets) {
+        for(Bullet b : player.getBullets()) {
             if(b.isActive())
                 b.draw(g, xLvlOffset);
         }
@@ -171,7 +171,7 @@ public class Playing extends State implements StateMethods {
         lvlCompleted = false;
         player.resetAll();
         enemyManager.resetAllEnemies();
-        player.bullets.clear();
+        player.getBullets().clear();
     }
 
     public void setGameOver(boolean gameOver) {
