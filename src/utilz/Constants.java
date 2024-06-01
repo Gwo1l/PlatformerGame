@@ -43,7 +43,7 @@ public class Constants {
 
         }
 
-        public static int GetMaxHealth(int enemy_type) {
+        public static int getMaxHealth(int enemy_type) {
             switch (enemy_type) {
                 case CRABBY:
                     return 10;
@@ -53,7 +53,7 @@ public class Constants {
             }
         }
 
-        public static int GetEnemyDmg(int enemy_type) {
+        public static int getEnemyDmg(int enemy_type) {
             switch (enemy_type) {
                 case CRABBY:
                     return 15;

@@ -28,7 +28,7 @@ public abstract class Enemy extends Entity {
 		super(x, y, width, height);
 		this.enemyType = enemyType;
 		initHitbox(x, y, width, height);
-		maxHealth = GetMaxHealth(enemyType);
+		maxHealth = getMaxHealth(enemyType);
 		currentHealth = maxHealth;
 
 	}
@@ -110,7 +110,7 @@ public abstract class Enemy extends Entity {
 
 	protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player) {
 		if (attackBox.intersects(player.hitbox))
-			player.changeHealth(-GetEnemyDmg(enemyType));
+			player.changeHealth(-getEnemyDmg(enemyType));
 		attackChecked = true;
 	}
 
